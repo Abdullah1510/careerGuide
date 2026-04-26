@@ -1,13 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global Base Styles ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 28%),
+    linear-gradient(180deg, #020617 0%, #0f172a 24%, #f8fafc 24%, #f8fafc 100%);
+  color: #0f172a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --cg-display:       clamp(2rem,   6vw,  3.5rem);
+  --cg-page-title:    clamp(1.6rem, 4vw,  2.5rem);
+  --cg-section-title: clamp(1.25rem,3vw,  1.875rem);
+  --cg-card-title:    clamp(1rem,   2vw,  1.125rem);
+  --cg-body-lg:       1.125rem;
+  --cg-body:          1rem;
+  --cg-caption:       0.875rem;
+}
+
+body::selection {
+  background: rgba(99, 102, 241, 0.18);
+}
+
+a {
+  text-decoration-skip-ink: auto;
+}
+
+/* ── Keyframes ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(-5px); }
+  50%       { transform: translateY(0); }
+}
+
+/* ── Custom utilities (used alongside Tailwind) ─── */
+@layer utilities {
+  .animate-float         { animation: float 6s ease-in-out infinite; }
+  .animate-float-delay   { animation: float 6s ease-in-out 2s infinite; }
+  .animate-float-delay-2 { animation: float 6s ease-in-out 4s infinite; }
+
+  .animate-fade-in-up          { animation: fadeInUp 0.7s ease-out both; }
+  .animate-fade-in-up-delay    { animation: fadeInUp 0.7s ease-out 0.2s both; }
+  .animate-fade-in-up-delay-2  { animation: fadeInUp 0.7s ease-out 0.4s both; }
+  .animate-fade-in-up-delay-3  { animation: fadeInUp 0.7s ease-out 0.6s both; }
+
+  .animate-slide-in-left { animation: slideInLeft 0.6s ease-out both; }
+  .animate-bounce-slow   { animation: bounceSlow 2s infinite; }
+  .animate-pulse-slow    { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+  .section-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .text-display {
+    font-size: var(--cg-display);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+
+  .text-page-title {
+    font-size: var(--cg-page-title);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+
+  .text-section-title {
+    font-size: var(--cg-section-title);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .text-card-title {
+    font-size: var(--cg-card-title);
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  .text-body-lg {
+    font-size: var(--cg-body-lg);
+    line-height: 1.75;
+  }
+
+  .text-body {
+    font-size: var(--cg-body);
+    line-height: 1.7;
+  }
+
+  .text-caption {
+    font-size: var(--cg-caption);
+    line-height: 1.5;
+  }
+
+  .page-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .page-shell::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 70%);
+    z-index: -1;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
