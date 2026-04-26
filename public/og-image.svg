@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="60%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#8b5cf6"/>
+      <stop offset="50%"  stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(148,163,184,0.05)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Glow circle top-left -->
+  <circle cx="150" cy="150" r="280" fill="rgba(139,92,246,0.08)"/>
+  <!-- Glow circle bottom-right -->
+  <circle cx="1100" cy="520" r="220" fill="rgba(34,211,238,0.06)"/>
+
+  <!-- Logo icon -->
+  <rect x="80" y="80" width="80" height="80" rx="20" fill="url(#logoGrad)"/>
+  <path d="M103 143C115 134 122 125 132 116C142 107 151 97 161 84" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M153 84H163V94" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="103" cy="143" r="5" fill="white"/>
+  <circle cx="132" cy="116" r="4.5" fill="white" opacity="0.9"/>
+  <circle cx="161" cy="84" r="5" fill="white"/>
+
+  <!-- Brand name -->
+  <text x="180" y="108" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="800" fill="white" letter-spacing="-1">CareerGuide</text>
+  <text x="180" y="148" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="600" fill="rgba(139,92,246,0.9)">India</text>
+
+  <!-- Accent line -->
+  <rect x="80" y="196" width="480" height="3" rx="2" fill="url(#accent)" opacity="0.6"/>
+
+  <!-- Main headline -->
+  <text x="80" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="62" font-weight="800" fill="white" letter-spacing="-2">Career Guidance</text>
+  <text x="80" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="62" font-weight="800" letter-spacing="-2">
+    <tspan fill="url(#accent)">After 10th &amp; 12th</tspan>
+  </text>
+
+  <!-- Subtext -->
+  <text x="80" y="430" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="rgba(148,163,184,0.9)" font-weight="400">Step-by-step roadmaps · Entrance exams · Salary data</text>
+  <text x="80" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="rgba(148,163,184,0.9)" font-weight="400">40+ careers · 100% Free · Built for India 🇮🇳</text>
+
+  <!-- Bottom badge -->
+  <rect x="80" y="530" width="320" height="50" rx="12" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1.5"/>
+  <text x="240" y="562" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="rgba(139,92,246,1)" font-weight="600" text-anchor="middle">career-guide-abdul.vercel.app</text>
+
+  <!-- Right side visual — career path dots -->
+  <circle cx="900" cy="200" r="60" fill="rgba(139,92,246,0.15)" stroke="rgba(139,92,246,0.3)" stroke-width="2"/>
+  <text x="900" y="212" font-family="system-ui" font-size="40" text-anchor="middle">🎓</text>
+
+  <circle cx="1060" cy="320" r="55" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)" stroke-width="2"/>
+  <text x="1060" y="332" font-family="system-ui" font-size="36" text-anchor="middle">🔬</text>
+
+  <circle cx="880" cy="440" r="50" fill="rgba(34,211,238,0.12)" stroke="rgba(34,211,238,0.3)" stroke-width="2"/>
+  <text x="880" y="452" font-family="system-ui" font-size="32" text-anchor="middle">💻</text>
+
+  <circle cx="1080" cy="490" r="45" fill="rgba(139,92,246,0.12)" stroke="rgba(139,92,246,0.25)" stroke-width="2"/>
+  <text x="1080" y="502" font-family="system-ui" font-size="30" text-anchor="middle">⚕️</text>
+
+  <!-- Connecting lines -->
+  <line x1="900" y1="260" x2="1010" y2="265" stroke="rgba(139,92,246,0.2)" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="1060" y1="375" x2="930" y2="390" stroke="rgba(99,102,241,0.2)" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="880" y1="490" x2="1035" y2="490" stroke="rgba(34,211,238,0.2)" stroke-width="2" stroke-dasharray="6,4"/>
+</svg>
