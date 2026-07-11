@@ -71,23 +71,23 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
   return (
     <div>
       {/* ── GUIDED FLOW CTA ──────────────────────────────────────────────── */}
-      <section className="bg-white py-16 px-4 border-b border-gray-100">
+      <section className="animated-section bg-white py-16 px-4 border-b border-gray-100">
         <div className="section-container text-center">
-          <span className="inline-block px-4 py-1.5 bg-violet-100 text-violet-700 rounded-full text-sm font-semibold mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-violet-100 text-violet-700 rounded-full text-sm font-semibold mb-4 animate-fade-in-up">
             🧭 {t('home.ctaBadge')}
           </span>
-          <h2 className="text-page-title text-gray-900 mb-3">
+          <h2 className="text-page-title text-gray-900 mb-3 animate-fade-in-up-delay">
             {t('home.ctaTitle')}
           </h2>
-          <p className="text-body-lg text-gray-500 mb-8 max-w-3xl mx-auto">
+          <p className="text-body-lg text-gray-500 mb-8 max-w-3xl mx-auto animate-fade-in-up-delay-2">
             {t('home.ctaDescription')}
           </p>
 
           {/* Quick selector */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 animate-fade-in-up-delay-3">
             <button
               onClick={() => onStartFlow('10th')}
-              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-violet-600 to-indigo-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-violet-200 hover:shadow-xl hover:scale-105 transition-all duration-200"
+              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-violet-600 to-indigo-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-violet-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
                 <span className="text-3xl">📘</span>
                 <div className="text-left">
@@ -99,7 +99,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
 
             <button
               onClick={() => onStartFlow('12th')}
-              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-rose-600 to-pink-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-rose-200 hover:shadow-xl hover:scale-105 transition-all duration-200"
+              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-rose-600 to-pink-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-rose-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
                 <span className="text-3xl">🎓</span>
                 <div className="text-left">
@@ -115,7 +115,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
       </section>
 
       {/* ── HOW IT WORKS ─────────────────────────────────────────────────── */}
-      <section className="py-14 px-4 bg-gradient-to-br from-violet-50 to-indigo-50">
+      <section className="animated-section py-14 px-4 bg-gradient-to-br from-violet-50 via-white to-cyan-50">
         <div className="section-container">
           <h2 className="text-section-title text-gray-900 text-center mb-10">{t('home.howItWorks')}</h2>
           <div className="grid sm:grid-cols-3 gap-6">
@@ -123,8 +123,12 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
               { step: '1', icon: '🎓', title: t('home.step1Title'), desc: t('home.step1Desc'), color: 'bg-violet-100 text-violet-700' },
               { step: '2', icon: '📚', title: t('home.step2Title'), desc: t('home.step2Desc'), color: 'bg-indigo-100 text-indigo-700' },
               { step: '3', icon: '🗺️', title: t('home.step3Title'), desc: t('home.step3Desc'), color: 'bg-pink-100 text-pink-700' },
-            ].map((item) => (
-              <div key={item.step} className="bg-white rounded-2xl p-6 shadow-sm border border-white text-center animate-fade-in-up">
+            ].map((item, index) => (
+              <div
+                key={item.step}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-white text-center card-hover animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.12}s` }}
+              >
                 <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center text-xl mx-auto mb-4`}>
                   {item.icon}
                 </div>
@@ -157,7 +161,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
                 className="group rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-slate-50 p-5 shadow-sm card-hover animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.07}s` }}
               >
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${guide.gradient} text-white flex items-center justify-center text-2xl mb-4`}>
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${guide.gradient} text-white flex items-center justify-center text-2xl mb-4 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300`}>
                   {guide.icon}
                 </div>
                 <h3 className="text-card-title text-gray-900 mb-2">
@@ -185,7 +189,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
       </section>
 
       {/* ── POSSIBLE PATHS ─────────────────────────────────────────────── */}
-      <section className="py-16 px-4 bg-white">
+      <section className="animated-section py-16 px-4 bg-white">
         <div className="section-container">
           <div className="max-w-3xl mx-auto text-center mb-10">
             <span className="inline-block px-4 py-1.5 bg-cyan-100 text-cyan-700 rounded-full text-sm font-semibold mb-4">
@@ -203,10 +207,10 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
             {possibilityCards.map((item, index) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-slate-50 p-5 shadow-sm card-hover animate-fade-in-up"
+                className="group rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-slate-50 p-5 shadow-sm card-hover animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.08}s` }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-2xl mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-violet-100 text-violet-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.icon}
                 </div>
                 <h3 className="text-card-title text-gray-900 mb-2">{item.title}</h3>
@@ -272,7 +276,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
       </section>
 
       {/* ── TOP CAREERS GRID ─────────────────────────────────────────────── */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="animated-section py-16 px-4 bg-gray-50">
         <div className="section-container">
           <div className="text-center mb-10">
             <h2 className="text-section-title text-gray-900 mb-2">{t('home.popularTitle')}</h2>
@@ -287,7 +291,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
                 style={{ animationDelay: `${i * 0.05}s` }}
               >
                 <div className={`bg-gradient-to-r ${c.gradient} p-4 text-white`}>
-                  <span className="text-3xl block mb-1">{c.icon}</span>
+                  <span className="text-3xl block mb-1 group-hover:scale-110 origin-left transition-transform duration-300">{c.icon}</span>
                   <p className="font-bold text-sm leading-tight">{c.title}</p>
                 </div>
                 <div className="p-3">
@@ -329,7 +333,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
             {upcomingExams.map((exam, i) => (
               <div
                 key={exam.name}
-                className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 animate-slide-in-left"
+                className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 card-hover animate-slide-in-left"
                 style={{ animationDelay: `${i * 0.07}s` }}
               >
                 <div className="flex items-center gap-2 mb-2">
@@ -350,13 +354,13 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
       </section>
 
       {/* ── SALARY INSIGHTS ──────────────────────────────────────────────── */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="animated-section py-16 px-4 bg-gray-50">
         <div className="section-container">
           <div className="text-center mb-10">
             <h2 className="text-section-title text-gray-900 mb-2">{t('home.salaryTitle')}</h2>
             <p className="text-body text-gray-500">{t('home.salaryDesc')}</p>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4 animate-fade-in-up">
             {[
               { field: 'AI / Data Science', range: '₹6L–₹60L/yr', pct: 97, color: 'bg-violet-500' },
               { field: 'Software Engineering (IIT/NIT)', range: '₹8L–₹50L/yr', pct: 94, color: 'bg-indigo-500' },
@@ -370,7 +374,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
               <div key={item.field} className="flex items-center gap-4">
                 <div className="w-44 sm:w-52 text-sm font-medium text-gray-700 flex-shrink-0 truncate">{item.field}</div>
                 <div className="flex-1 bg-gray-100 rounded-full h-2.5 overflow-hidden">
-                  <div className={`h-full ${item.color} rounded-full`} style={{ width: `${item.pct}%` }} />
+                  <div className={`career-meter h-full ${item.color} rounded-full`} style={{ '--meter-width': `${item.pct}%` }} />
                 </div>
                 <div className="text-sm font-semibold text-gray-700 w-28 text-right flex-shrink-0 hidden sm:block">{item.range}</div>
               </div>
@@ -380,9 +384,10 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
       </section>
 
       {/* ── BOOK COUNSELING CTA ───────────────────────────────────────────── */}
-      <section className="py-16 px-4 bg-gradient-to-r from-violet-600 to-indigo-700 text-white">
+      <section className="relative overflow-hidden py-16 px-4 bg-gradient-to-r from-violet-600 via-indigo-700 to-cyan-700 text-white">
+        <div className="absolute inset-0 opacity-20 hero-scanline" />
         <div className="section-container text-center">
-          <span className="text-4xl block mb-4">🎓</span>
+          <span className="text-4xl block mb-4 animate-float">🎓</span>
           <h2 className="text-section-title mb-3">{t('home.counselingTitle')}</h2>
           <p className="text-body-lg text-violet-200 mb-8 max-w-2xl mx-auto">
             {t('home.counselingDesc')}

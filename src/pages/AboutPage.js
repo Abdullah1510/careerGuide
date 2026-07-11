@@ -111,6 +111,41 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* YouTube Channel */}
+        <section className="max-w-4xl mx-auto rounded-3xl overflow-hidden bg-gradient-to-br from-red-600 via-rose-600 to-slate-900 text-white shadow-xl shadow-red-100">
+          <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-center p-7 sm:p-10">
+            <div>
+              <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-red-600 shadow-lg mb-5">
+                <svg className="h-9 w-9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z" />
+                </svg>
+              </div>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-100">New YouTube Channel</p>
+              <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight">
+                Md Abdullah TechStack
+              </h2>
+              <p className="mt-4 text-red-50 leading-relaxed">
+                I recently started a YouTube channel where I share videos about science, technology, coding, and useful digital learning for students.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur">
+              <h3 className="font-bold text-lg mb-3">Support the channel</h3>
+              <p className="text-sm leading-6 text-white/80 mb-5">
+                If CareerGuide India has helped you, please visit the channel, watch the latest videos, like, and subscribe. Your support helps me create more free learning content.
+              </p>
+              <a
+                href="https://www.youtube.com/@MdAbdullah-TechStack"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-red-600 shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all"
+              >
+                ▶ Like & Subscribe
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Stats */}
         <section>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

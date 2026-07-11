@@ -130,7 +130,7 @@ const translations = {
       keyExams: 'Key Exams 2026',
       copyright: '© 2026 CareerGuide India. All information is for guidance purposes only.',
       madeFor: 'Made for Indian Students',
-      updated: 'Updated: Apr 2026',
+      updated: 'Updated: Jul 2026',
       streams: {
         engineering: 'Engineering & Technology',
         medical: 'Medical & Healthcare',
@@ -450,7 +450,7 @@ const translations = {
       keyExams: 'मुख्य परीक्षाएँ 2026',
       copyright: '© 2026 CareerGuide India. सभी जानकारी केवल मार्गदर्शन के लिए है.',
       madeFor: 'भारतीय छात्रों के लिए',
-      updated: 'अपडेटेड: अप्रैल 2026',
+      updated: 'अपडेटेड: जुलाई 2026',
       streams: {
         engineering: 'इंजीनियरिंग और टेक्नोलॉजी',
         medical: 'मेडिकल और हेल्थकेयर',

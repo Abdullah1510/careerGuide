@@ -41,8 +41,8 @@ export default function RoadmapPage({ career, onBack, onBookCounseling }) {
           <button onClick={onBack} className="flex items-center gap-2 text-white/60 hover:text-white text-sm mb-5 transition-colors">
             ← {t('common.backToCareers')}
           </button>
-          <div className="flex items-start gap-5">
-            <div className="w-18 h-18 bg-white/20 rounded-2xl p-4 backdrop-blur text-4xl flex items-center justify-center flex-shrink-0">
+          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
+            <div className="w-16 h-16 sm:w-18 sm:h-18 bg-white/20 rounded-2xl p-3 sm:p-4 backdrop-blur text-3xl sm:text-4xl flex items-center justify-center flex-shrink-0">
               {career.icon}
             </div>
             <div className="flex-1">
@@ -79,23 +79,23 @@ export default function RoadmapPage({ career, onBack, onBookCounseling }) {
 
             {/* ── INTERACTIVE ROADMAP TIMELINE ── */}
             <section>
-              <h2 className="text-section-title text-gray-900 mb-6 flex items-center gap-2">
+              <h2 className="text-[1.15rem] sm:text-section-title text-gray-900 mb-6 flex flex-wrap items-center gap-2 leading-tight font-bold">
                 <span>🗺️</span> {t('common.stepByStepRoadmap')}
               </h2>
 
               {/* Step Progress Bar */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-5">
-                <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 sm:p-5 mb-5 sm:overflow-x-auto scrollbar-hide">
+                <div className="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-1 sm:w-max sm:max-w-none sm:pb-2 sm:pr-2">
                   {career.roadmap.map((step, idx) => {
                     return (
                       <button
                         key={idx}
                         onClick={() => setActiveStep(idx)}
-                        className="flex flex-col items-center gap-1.5 flex-shrink-0 group"
+                        className="flex w-full sm:w-16 flex-col items-center gap-1.5 flex-shrink-0 group"
                       >
                         {/* Connector line */}
                         <div className="flex items-center w-full">
-                          <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-200 ${
+                          <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-200 ${
                             idx === activeStep
                               ? `bg-gradient-to-br ${career.gradient} text-white shadow-lg scale-110`
                               : idx < activeStep
@@ -105,10 +105,10 @@ export default function RoadmapPage({ career, onBack, onBookCounseling }) {
                             {idx < activeStep ? '✓' : step.step}
                           </div>
                           {idx < career.roadmap.length - 1 && (
-                            <div className={`h-0.5 w-8 mx-1 transition-colors ${idx < activeStep ? 'bg-green-300' : 'bg-gray-200'}`} />
+                            <div className={`hidden sm:block h-0.5 w-6 mx-0.5 transition-colors ${idx < activeStep ? 'bg-green-300' : 'bg-gray-200'}`} />
                           )}
                         </div>
-                        <span className={`text-xs font-medium max-w-[4rem] text-center leading-tight transition-colors ${
+                        <span className={`text-[11px] sm:text-xs font-medium max-w-[4rem] text-center leading-tight transition-colors ${
                           idx === activeStep ? career.textColor : 'text-gray-400'
                         }`}>
                           {step.title.split(' ')[0]}
@@ -122,29 +122,29 @@ export default function RoadmapPage({ career, onBack, onBookCounseling }) {
               {/* Active Step Detail Card */}
               <div className={`bg-white rounded-2xl border ${typeConf.border} shadow-sm overflow-hidden animate-fade-in-up`}>
                 {/* Step header */}
-                <div className={`${typeConf.bg} px-6 py-4 flex items-center justify-between`}>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${career.gradient} flex items-center justify-center text-white font-bold text-lg shadow`}>
+                <div className={`${typeConf.bg} px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between`}>
+                  <div className="flex items-start gap-3">
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${career.gradient} flex items-center justify-center text-white font-bold text-lg shadow flex-shrink-0`}>
                       {currentStep?.icon}
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${typeConf.bg} ${typeConf.text} border ${typeConf.border}`}>
                           {t(`common.stepTypes.${currentStep?.type || 'education'}`)}
                         </span>
                         <span className="text-xs text-gray-500">{t('common.step')} {currentStep?.step} {t('common.of')} {career.roadmap.length}</span>
                       </div>
-                      <h3 className="font-bold text-gray-900 text-lg">{currentStep?.title}</h3>
+                      <h3 className="font-bold text-gray-900 text-base sm:text-lg leading-tight">{currentStep?.title}</h3>
                     </div>
                   </div>
-                  <div className={`text-right`}>
+                  <div className="text-left sm:text-right">
                     <p className="text-xs text-gray-500">{t('common.duration')}</p>
                     <p className={`font-semibold text-sm ${typeConf.text}`}>{currentStep?.duration}</p>
                   </div>
                 </div>
 
                 {/* Step body */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <ul className="space-y-3 mb-5">
                     {currentStep?.details.map((d, di) => (
                       <li key={di} className="flex items-start gap-3">
@@ -169,7 +169,7 @@ export default function RoadmapPage({ career, onBack, onBookCounseling }) {
                 </div>
 
                 {/* Navigation */}
-                <div className="px-6 pb-5 flex justify-between">
+                <div className="px-4 sm:px-6 pb-5 flex gap-3 justify-between">
                   <button
                     onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
                     disabled={activeStep === 0}
@@ -197,18 +197,20 @@ export default function RoadmapPage({ career, onBack, onBookCounseling }) {
                       <button
                         key={idx}
                         onClick={() => setActiveStep(idx)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left ${
+                        className={`w-full flex flex-col sm:flex-row sm:items-center gap-3 px-3 sm:px-4 py-3 rounded-xl transition-all text-left ${
                           idx === activeStep ? `${conf.bg} ${conf.border} border` : 'hover:bg-gray-50'
                         }`}
                       >
-                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold bg-gradient-to-br ${career.gradient} text-white flex-shrink-0`}>
-                          {step.step}
-                        </span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-gray-800 truncate">{step.title}</p>
-                          <p className="text-xs text-gray-500 truncate">{step.details[0]}</p>
+                        <div className="flex items-start gap-3 w-full min-w-0">
+                          <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold bg-gradient-to-br ${career.gradient} text-white flex-shrink-0`}>
+                            {step.step}
+                          </span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-gray-800 leading-snug">{step.title}</p>
+                            <p className="text-xs text-gray-500 line-clamp-2 sm:truncate">{step.details[0]}</p>
+                          </div>
                         </div>
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${conf.bg} ${conf.text} flex-shrink-0`}>
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${conf.bg} ${conf.text} flex-shrink-0 self-start sm:self-center sm:ml-auto`}>
                           {step.duration}
                         </span>
                       </button>

@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { latestExams2026 } from '../data/careerData';
 import { useLanguage } from '../context/LanguageContext';
+import { getExamGuidePathByName } from '../data/examGuides';
 
 export default function ExamCalendar() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -134,6 +136,12 @@ export default function ExamCalendar() {
                     </span>
                   </div>
                 </div>
+                <Link
+                  to={getExamGuidePathByName(exam.name)}
+                  className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-violet-600 hover:text-violet-700"
+                >
+                  Open details →
+                </Link>
               </div>
             ))}
           </div>

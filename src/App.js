@@ -21,6 +21,7 @@ import ExamCalendar from './components/ExamCalendar';
 import StreamsPage from './pages/StreamsPage';
 import StreamGuidePage from './pages/StreamGuidePage';
 import AboutPage from './pages/AboutPage';
+import ExamDetailPage from './pages/ExamDetailPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -102,6 +103,7 @@ export default function App() {
           <Route path="streams" element={<StreamsPage />} />
           <Route path="streams/:streamId" element={<StreamGuidePage />} />
           <Route path="exams" element={<ExamCalendar />} />
+          <Route path="exams/:examId" element={<ExamDetailPage />} />
           <Route path="counseling" element={<CounselingPage />} />
           <Route path="about" element={<AboutPage />} />
         </Route>
