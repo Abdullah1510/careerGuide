@@ -16,6 +16,7 @@ export default function Navbar() {
     { to: '/after-10th', label: t('nav.after10th') },
     { to: '/after-12th', label: t('nav.after12th') },
     { to: '/exams', label: t('nav.examCalendar') },
+    { to: '/universities', label: 'Universities' },
   ];
 
   useEffect(() => {

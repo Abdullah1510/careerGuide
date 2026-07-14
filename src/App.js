@@ -22,6 +22,7 @@ import StreamsPage from './pages/StreamsPage';
 import StreamGuidePage from './pages/StreamGuidePage';
 import AboutPage from './pages/AboutPage';
 import ExamDetailPage from './pages/ExamDetailPage';
+import UniversitiesPage from './pages/UniversitiesPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -58,6 +59,7 @@ function HomePage() {
       after10th: '/after-10th',
       after12th: '/after-12th',
       exams: '/exams',
+      universities: '/universities',
       counseling: '/counseling',
     };
 
@@ -102,6 +104,7 @@ export default function App() {
           <Route path="after-12th/:streamId/:careerId" element={<RoadmapDetailPage />} />
           <Route path="streams" element={<StreamsPage />} />
           <Route path="streams/:streamId" element={<StreamGuidePage />} />
+          <Route path="universities" element={<UniversitiesPage />} />
           <Route path="exams" element={<ExamCalendar />} />
           <Route path="exams/:examId" element={<ExamDetailPage />} />
           <Route path="counseling" element={<CounselingPage />} />

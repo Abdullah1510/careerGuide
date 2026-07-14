@@ -9,9 +9,14 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
+  width: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background:
     radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 28%),
@@ -37,6 +42,47 @@ body::selection {
 
 a {
   text-decoration-skip-ink: auto;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+li {
+  overflow-wrap: anywhere;
+}
+
+[class*="rounded"] {
+  border-radius: 4px !important;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --cg-display:       clamp(1.85rem, 9vw, 2.45rem);
+    --cg-page-title:    clamp(1.55rem, 8vw, 2.1rem);
+    --cg-section-title: clamp(1.2rem, 6vw, 1.55rem);
+    --cg-body-lg:       1rem;
+    --cg-body:          0.95rem;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top, rgba(99, 102, 241, 0.1), transparent 22%),
+      linear-gradient(180deg, #020617 0%, #0f172a 20%, #f8fafc 20%, #f8fafc 100%);
+  }
 }
 
 /* ── Keyframes ─── */

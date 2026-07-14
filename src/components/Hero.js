@@ -166,12 +166,6 @@ export default function Hero({ onStartFlow, setCurrentPage }) {
           </div>
         </div>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce-slow">
-          <span className="text-slate-300/70 text-xs tracking-[0.2em] uppercase">{t('hero.scroll')}</span>
-          <div className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center pt-1.5">
-            <div className="w-1 h-2 bg-cyan-300 rounded-full" />
-          </div>
-        </div>
       </div>
     </section>
   );

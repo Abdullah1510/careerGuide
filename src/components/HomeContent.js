@@ -1,8 +1,25 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { latestExams2026 } from '../data/careerData';
 import { careerStreamGuides } from '../data/streamGuides';
 import { useLanguage } from '../context/LanguageContext';
 import { getLocalizedStreamLabel } from '../utils/streamI18n';
+
+const createCounsellorImage = (initials, from, to) =>
+  `data:image/svg+xml,${encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+      <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="${from}" />
+          <stop offset="100%" stop-color="${to}" />
+        </linearGradient>
+      </defs>
+      <rect width="320" height="320" fill="url(#bg)" />
+      <circle cx="160" cy="118" r="62" fill="#fff" opacity="0.92" />
+      <path d="M54 292c15-70 58-106 106-106s91 36 106 106" fill="#fff" opacity="0.92" />
+      <text x="160" y="255" text-anchor="middle" font-size="52" font-family="Arial, sans-serif" font-weight="700" fill="#0f172a">${initials}</text>
+    </svg>
+  `)}`;
 
 const exampleFlows = [
   {
@@ -42,9 +59,44 @@ const topCareers = [
   { icon: '☁️', title: 'DevOps / Cloud Engineer', salary: '₹5L–₹45L', stream: 'PCM', demand: 'Very High', gradient: 'from-cyan-500 to-sky-600', path: '/after-12th/pcm/devops-engineer' },
 ];
 
+const counsellors = [
+  {
+    name: 'Adnan Sheikh',
+    expertise: 'Teaching & Student Learning',
+    subjects: ['Teaching', 'Learning', 'Study Skills'],
+    image: createCounsellorImage('AS', '#f43f5e', '#8b5cf6'),
+  },
+  {
+    name: 'Md Abdullah',
+    expertise: 'Software Engineering & Coding Careers',
+    subjects: ['Software Engineer', 'Engineering', 'Coding'],
+    image: createCounsellorImage('MA', '#2563eb', '#06b6d4'),
+  },
+  {
+    name: 'MD Faiz',
+    expertise: 'DevOps Engineering & Cloud Careers',
+    subjects: ['DevOps Engineer', 'Cloud', 'Automation'],
+    image: createCounsellorImage('MF', '#0f766e', '#22c55e'),
+  },
+  {
+    name: 'Aayush Naithani',
+    expertise: 'UX Design & Product Careers',
+    subjects: ['UX Designer', 'Product Design', 'UI Research'],
+    image: createCounsellorImage('AN', '#d97706', '#ec4899'),
+  },
+];
+
 export default function HomeContent({ setCurrentPage, onStartFlow }) {
   const { t } = useLanguage();
+  const [counsellorIndex, setCounsellorIndex] = useState(0);
+  const activeCounsellor = counsellors[counsellorIndex];
   const upcomingExams = latestExams2026.filter((e) => e.status !== 'Completed').slice(0, 6);
+  const showPreviousCounsellor = () => {
+    setCounsellorIndex((current) => (current === 0 ? counsellors.length - 1 : current - 1));
+  };
+  const showNextCounsellor = () => {
+    setCounsellorIndex((current) => (current + 1) % counsellors.length);
+  };
   const possibilityCards = [
     {
       icon: '🎓',
@@ -184,6 +236,120 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
             >
               {t('common.exploreCareerStreams')} →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── MEET YOUR COUNSELLOR ───────────────────────────────────────── */}
+      <section className="animated-section py-12 sm:py-16 px-4 bg-slate-50">
+        <div className="section-container">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between mb-8">
+            <div>
+              <span className="inline-block px-4 py-1.5 bg-violet-100 text-violet-700 rounded-full text-sm font-semibold mb-4">
+                Meet Your Counsellor
+              </span>
+              <h2 className="text-section-title text-gray-900 mb-2">Talk to the right expert for your stream</h2>
+              <p className="text-body text-gray-500 max-w-2xl">
+                Pick guidance from counsellors who understand entrance exams, subject choices, colleges, and career roadmaps.
+              </p>
+            </div>
+            <div className="hidden sm:flex sm:items-center sm:gap-2">
+              <button
+                type="button"
+                onClick={showPreviousCounsellor}
+                className="h-11 w-10 rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:border-violet-300 hover:text-violet-700 transition-colors"
+                aria-label="Previous counsellor"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                onClick={showNextCounsellor}
+                className="h-11 w-10 rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:border-violet-300 hover:text-violet-700 transition-colors"
+                aria-label="Next counsellor"
+              >
+                →
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm animate-fade-in-up">
+              <div className="grid gap-0 sm:grid-cols-[15rem_minmax(0,1fr)]">
+                <div className="bg-slate-100 p-3 sm:p-0">
+                  <img
+                    src={activeCounsellor.image}
+                    alt={activeCounsellor.name}
+                    className="mx-auto h-72 w-full max-w-sm rounded-xl object-cover object-top sm:h-full sm:max-w-none"
+                  />
+                </div>
+                <div className="p-5 sm:p-6 flex flex-col justify-center">
+                  <p className="text-sm font-semibold text-violet-600 mb-2">Featured Counsellor</p>
+                  <h3 className="text-card-title text-gray-900 mb-2">{activeCounsellor.name}</h3>
+                  <p className="text-body text-gray-500 mb-5">{activeCounsellor.expertise}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {activeCounsellor.subjects.map((subject) => (
+                      <span key={subject} className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
+                        {subject}
+                      </span>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage('counseling')}
+                    className="mt-6 inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  >
+                    Book Free Counselling →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:hidden">
+              <button
+                type="button"
+                onClick={showPreviousCounsellor}
+                className="h-12 rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:border-violet-300 hover:text-violet-700 transition-colors"
+                aria-label="Previous counsellor"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                onClick={showNextCounsellor}
+                className="h-12 rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:border-violet-300 hover:text-violet-700 transition-colors"
+                aria-label="Next counsellor"
+              >
+                →
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-4 lg:grid-cols-2">
+              {counsellors.map((counsellor, index) => (
+                <button
+                  key={counsellor.name}
+                  type="button"
+                  onClick={() => setCounsellorIndex(index)}
+                  className={`text-left rounded-2xl border bg-white p-3 shadow-sm transition-all ${
+                    index === counsellorIndex
+                      ? 'border-violet-300 ring-2 ring-violet-100'
+                      : 'border-gray-100 hover:border-violet-200'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={counsellor.image}
+                      alt={counsellor.name}
+                      className="h-14 w-14 shrink-0 rounded-xl object-cover object-top sm:h-12 sm:w-12"
+                    />
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-gray-900 leading-tight">{counsellor.name}</p>
+                      <p className="mt-1 text-xs text-gray-500 leading-snug">{counsellor.subjects[0]}</p>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -360,7 +526,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
             <h2 className="text-section-title text-gray-900 mb-2">{t('home.salaryTitle')}</h2>
             <p className="text-body text-gray-500">{t('home.salaryDesc')}</p>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4 animate-fade-in-up">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-6 space-y-5 sm:space-y-4 animate-fade-in-up">
             {[
               { field: 'AI / Data Science', range: '₹6L–₹60L/yr', pct: 97, color: 'bg-violet-500' },
               { field: 'Software Engineering (IIT/NIT)', range: '₹8L–₹50L/yr', pct: 94, color: 'bg-indigo-500' },
@@ -371,12 +537,12 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
               { field: 'Law (LLB Top NLU)', range: '₹3L–₹35L/yr', pct: 74, color: 'bg-amber-500' },
               { field: 'Fashion Design (NIFT)', range: '₹2.5L–₹20L/yr', pct: 60, color: 'bg-pink-500' },
             ].map((item) => (
-              <div key={item.field} className="flex items-center gap-4">
-                <div className="w-44 sm:w-52 text-sm font-medium text-gray-700 flex-shrink-0 truncate">{item.field}</div>
-                <div className="flex-1 bg-gray-100 rounded-full h-2.5 overflow-hidden">
+              <div key={item.field} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-2 sm:grid-cols-[13rem_minmax(0,1fr)_7rem] sm:gap-x-4">
+                <div className="min-w-0 text-sm font-medium text-gray-700 sm:truncate">{item.field}</div>
+                <div className="col-span-2 h-2.5 overflow-hidden rounded-full bg-gray-100 sm:col-span-1 sm:col-start-2 sm:row-start-1">
                   <div className={`career-meter h-full ${item.color} rounded-full`} style={{ '--meter-width': `${item.pct}%` }} />
                 </div>
-                <div className="text-sm font-semibold text-gray-700 w-28 text-right flex-shrink-0 hidden sm:block">{item.range}</div>
+                <div className="col-start-2 row-start-1 whitespace-nowrap text-right text-xs font-bold text-gray-700 sm:col-start-3 sm:text-sm sm:font-semibold">{item.range}</div>
               </div>
             ))}
           </div>
