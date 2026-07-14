@@ -209,17 +209,17 @@ export default function StreamGuidePage() {
                 <span>📊</span> {t('streamGuide.keyFacts')}
               </h3>
               <div className="space-y-3 text-sm">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-gray-500">{t('common.duration')}</span>
-                  <span className="font-semibold text-gray-900">{stream.duration}</span>
+                <div className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-3">
+                  <span className="text-gray-500 whitespace-nowrap">{t('common.duration')}</span>
+                  <span className="min-w-0 font-semibold text-gray-900 break-words">{stream.duration}</span>
                 </div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-gray-500">{t('common.fees')}</span>
-                  <span className="font-semibold text-gray-900">{stream.fees}</span>
+                <div className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-3">
+                  <span className="text-gray-500 whitespace-nowrap">{t('common.fees')}</span>
+                  <span className="min-w-0 font-semibold text-gray-900 break-words">{stream.fees}</span>
                 </div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-gray-500">{t('common.eligibility')}</span>
-                  <span className="font-semibold text-gray-900">{stream.eligibility}</span>
+                <div className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-3">
+                  <span className="text-gray-500 whitespace-nowrap">{t('common.eligibility')}</span>
+                  <span className="min-w-0 font-semibold text-gray-900 break-words">{stream.eligibility}</span>
                 </div>
               </div>
             </div>

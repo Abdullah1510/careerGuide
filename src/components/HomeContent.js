@@ -123,23 +123,23 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
   return (
     <div>
       {/* ── GUIDED FLOW CTA ──────────────────────────────────────────────── */}
-      <section className="animated-section bg-white py-16 px-4 border-b border-gray-100">
+      <section className="animated-section bg-white py-8 sm:py-10 px-4 border-b border-gray-100">
         <div className="section-container text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-violet-100 text-violet-700 rounded-full text-sm font-semibold mb-4 animate-fade-in-up">
+          <span className="inline-flex items-center gap-2 px-4 py-1 bg-violet-100 text-violet-700 rounded-full text-sm font-semibold mb-3 animate-fade-in-up">
             🧭 {t('home.ctaBadge')}
           </span>
-          <h2 className="text-page-title text-gray-900 mb-3 animate-fade-in-up-delay">
+          <h2 className="text-page-title text-gray-900 mb-2 animate-fade-in-up-delay">
             {t('home.ctaTitle')}
           </h2>
-          <p className="text-body-lg text-gray-500 mb-8 max-w-3xl mx-auto animate-fade-in-up-delay-2">
+          <p className="text-body-lg text-gray-500 mb-5 max-w-3xl mx-auto animate-fade-in-up-delay-2">
             {t('home.ctaDescription')}
           </p>
 
           {/* Quick selector */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 animate-fade-in-up-delay-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3 animate-fade-in-up-delay-3">
             <button
               onClick={() => onStartFlow('10th')}
-              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-violet-600 to-indigo-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-violet-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-violet-600 to-indigo-700 text-white px-6 py-3 rounded-2xl shadow-lg shadow-violet-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
                 <span className="text-3xl">📘</span>
                 <div className="text-left">
@@ -151,7 +151,7 @@ export default function HomeContent({ setCurrentPage, onStartFlow }) {
 
             <button
               onClick={() => onStartFlow('12th')}
-              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-rose-600 to-pink-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-rose-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group w-full sm:w-auto flex items-center gap-4 bg-gradient-to-r from-rose-600 to-pink-700 text-white px-6 py-3 rounded-2xl shadow-lg shadow-rose-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
                 <span className="text-3xl">🎓</span>
                 <div className="text-left">

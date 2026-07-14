@@ -319,3 +319,42 @@ li {
     display: none;
   }
 }
+
+/* Compact button sizing across desktop and mobile. */
+button.py-4,
+a.py-4 {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+button.py-3\.5,
+a.py-3\.5 {
+  padding-top: 0.65rem !important;
+  padding-bottom: 0.65rem !important;
+}
+
+button.py-3,
+a.py-3 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+button.py-2\.5,
+a.py-2\.5 {
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
+}
+
+button.py-2,
+a.py-2 {
+  padding-top: 0.35rem !important;
+  padding-bottom: 0.35rem !important;
+}
+
+button.h-12 {
+  height: 2.5rem !important;
+}
+
+button.h-11 {
+  height: 2.25rem !important;
+}

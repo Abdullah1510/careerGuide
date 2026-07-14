@@ -8,6 +8,17 @@ import {
 } from '../data/universityGuide';
 
 const allRegions = [...stateUniversityGuide, ...unionTerritoryUniversityGuide];
+const isUnionTerritoryRegion = (state) => unionTerritoryUniversityGuide.some((item) => item.state === state);
+const hasCentralUniversity = (region) => region.centralUniversities.some((name) => !name.startsWith('No dedicated'));
+
+const admissionRouteCards = [
+  { icon: '🎓', route: 'General UG', detail: 'CUET or Class 12 merit depending on university', accent: 'bg-cyan-50 text-cyan-700 border-cyan-100' },
+  { icon: '⚙️', route: 'Engineering', detail: 'JEE Main, state CET, or institute exam', accent: 'bg-indigo-50 text-indigo-700 border-indigo-100' },
+  { icon: '🩺', route: 'Medical', detail: 'NEET UG for MBBS/BDS and many allied routes', accent: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+  { icon: '⚖️', route: 'Law', detail: 'CLAT, AILET, CUET, or state/university law tests', accent: 'bg-amber-50 text-amber-700 border-amber-100' },
+  { icon: '🎨', route: 'Design', detail: 'NIFT, NID, UCEED, CEED, or institute tests', accent: 'bg-rose-50 text-rose-700 border-rose-100' },
+  { icon: '🏛️', route: 'Private universities', detail: 'Own forms, interviews, scholarships, and entrance tests', accent: 'bg-slate-50 text-slate-700 border-slate-200' },
+];
 
 export default function UniversitiesPage() {
   const [selectedRegion, setSelectedRegion] = useState('All');
@@ -19,13 +30,13 @@ export default function UniversitiesPage() {
     const query = searchTerm.trim().toLowerCase();
 
     return allRegions.filter((region) => {
-      const isUnionTerritory = unionTerritoryUniversityGuide.some((item) => item.state === region.state);
+      const isUnionTerritory = isUnionTerritoryRegion(region.state);
       const matchesRegion = selectedRegion === 'All' || region.state === selectedRegion;
       const matchesType =
         regionType === 'all' ||
         (regionType === 'states' && !isUnionTerritory) ||
         (regionType === 'uts' && isUnionTerritory) ||
-        (regionType === 'central' && region.centralUniversities.some((name) => !name.startsWith('No dedicated')));
+        (regionType === 'central' && hasCentralUniversity(region));
       const searchableText = [
         region.state,
         region.bestFor,
@@ -47,36 +58,38 @@ export default function UniversitiesPage() {
     .slice(0, 18);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-16">
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-cyan-950 px-4 py-16 text-white">
-        <div className="absolute inset-0 opacity-20 hero-scanline" />
+    <div className="min-h-screen bg-[#f5f7fb] pt-16">
+      <section className="relative overflow-hidden bg-slate-950 px-4 py-14 text-white sm:py-16">
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,47,73,0.95),rgba(49,46,129,0.76)_48%,rgba(15,23,42,0.98))]" />
+        <div className="absolute inset-0 opacity-25 hero-scanline" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#f5f7fb] to-transparent" />
         <div className="section-container relative z-10">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-semibold text-cyan-100">
-                University Finder India
+              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1.5 text-sm font-semibold text-cyan-100">
+                🏛️ University Finder India
               </span>
-              <h1 className="mt-5 text-page-title text-white">Find top universities by state, course direction, and admission route</h1>
-              <p className="mt-4 max-w-3xl text-body-lg text-white/75">
+              <h1 className="mt-5 max-w-4xl text-page-title text-white">Find top universities by state, course direction, and admission route</h1>
+              <p className="mt-4 max-w-3xl text-body-lg text-slate-200">
                 Compare state-wise top universities, central university options, CUET routes, professional entrance exams, documents, counselling, and seat confirmation in one place.
               </p>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {[
-                  { value: '36', label: 'States & UTs' },
-                  { value: '100+', label: 'University options' },
-                  { value: 'CUET+', label: 'Admission routes' },
+                  { value: '36', label: 'States & UTs', tone: 'text-cyan-200' },
+                  { value: '100+', label: 'University options', tone: 'text-amber-200' },
+                  { value: 'CUET+', label: 'Admission routes', tone: 'text-emerald-200' },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
-                    <p className="text-2xl font-bold text-white">{item.value}</p>
+                  <div key={item.label} className="border border-white/10 bg-white/10 p-4 shadow-xl shadow-slate-950/10 backdrop-blur">
+                    <p className={`text-2xl font-bold ${item.tone}`}>{item.value}</p>
                     <p className="mt-1 text-sm text-white/65">{item.label}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-2xl shadow-slate-950/20 backdrop-blur">
-              <div className="rounded-xl bg-white p-5 text-slate-900">
-                <p className="text-xs font-bold uppercase tracking-wide text-violet-600">Quick Finder</p>
+            <div className="border border-white/10 bg-white/10 p-3 shadow-2xl shadow-slate-950/30 backdrop-blur">
+              <div className="bg-white p-5 text-slate-900 shadow-xl">
+                <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Quick Finder</p>
                 <h2 className="mt-2 text-xl font-bold text-slate-950">Search universities faster</h2>
                 <div className="mt-5 space-y-3">
                   <label className="block">
@@ -84,7 +97,7 @@ export default function UniversitiesPage() {
                     <select
                       value={selectedRegion}
                       onChange={(event) => setSelectedRegion(event.target.value)}
-                      className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
+                      className="mt-2 w-full border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
                     >
                       <option value="All">All India</option>
                       {allRegions.map((region) => (
@@ -100,13 +113,13 @@ export default function UniversitiesPage() {
                       value={searchTerm}
                       onChange={(event) => setSearchTerm(event.target.value)}
                       placeholder="Example: Delhi, Jadavpur, medical, CUET"
-                      className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
+                      className="mt-2 w-full border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
                     />
                   </label>
                 </div>
-                <div className="mt-5 rounded-xl bg-slate-950 p-4 text-white">
-                  <p className="text-2xl font-bold">{filteredRegions.length}</p>
-                  <p className="mt-1 text-sm text-slate-300">matching regions in the current filter</p>
+                <div className="mt-5 grid grid-cols-[auto_1fr] items-center gap-4 bg-slate-950 p-4 text-white">
+                  <p className="text-3xl font-bold text-cyan-200">{filteredRegions.length}</p>
+                  <p className="text-sm text-slate-300">matching regions in the current filter</p>
                 </div>
               </div>
             </div>
@@ -114,46 +127,43 @@ export default function UniversitiesPage() {
         </div>
       </section>
 
-      <section className="section-container py-12">
+      <section className="section-container py-10 sm:py-12">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="text-section-title text-slate-900 mb-4">How university admission works</h2>
             <div className="space-y-3">
-              {admissionProcessGuide.map((step) => (
-                <div key={step.title} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+              {admissionProcessGuide.map((step, index) => (
+                <div key={step.title} className="grid gap-3 border border-slate-100 bg-slate-50 p-4 sm:grid-cols-[2.5rem_1fr]">
+                  <span className="flex h-9 w-9 items-center justify-center bg-slate-950 text-sm font-bold text-white">{index + 1}</span>
+                  <div>
                   <h3 className="font-bold text-slate-900">{step.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{step.details}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-2xl border border-violet-100 bg-white p-6 shadow-sm">
+            <div className="border border-cyan-100 bg-white p-6 shadow-sm">
               <h2 className="text-section-title text-slate-900 mb-4">Central university rules students must know</h2>
               <div className="grid gap-3">
                 {centralUniversityHighlights.map((point) => (
-                  <div key={point} className="flex gap-3 rounded-xl bg-violet-50 p-4">
-                    <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-violet-500" />
-                    <p className="text-sm leading-6 text-violet-900">{point}</p>
+                  <div key={point} className="flex gap-3 border border-cyan-100 bg-cyan-50 p-4">
+                    <span className="mt-1 h-2.5 w-2.5 shrink-0 bg-cyan-600" />
+                    <p className="text-sm leading-6 text-cyan-950">{point}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="text-section-title text-slate-900 mb-4">Common admission routes</h2>
               <div className="grid gap-3 sm:grid-cols-2">
-                {[
-                  ['General UG', 'CUET or Class 12 merit depending on university'],
-                  ['Engineering', 'JEE Main, state CET, or institute exam'],
-                  ['Medical', 'NEET UG for MBBS/BDS and many allied routes'],
-                  ['Law', 'CLAT, AILET, CUET, or state/university law tests'],
-                  ['Design', 'NIFT, NID, UCEED, CEED, or institute tests'],
-                  ['Private universities', 'Own forms, interviews, scholarships, and entrance tests'],
-                ].map(([route, detail]) => (
-                  <div key={route} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                    <p className="font-bold text-slate-900">{route}</p>
+                {admissionRouteCards.map(({ icon, route, detail, accent }) => (
+                  <div key={route} className={`border p-4 ${accent}`}>
+                    <p className="text-2xl">{icon}</p>
+                    <p className="mt-2 font-bold text-slate-900">{route}</p>
                     <p className="mt-1 text-sm leading-6 text-slate-600">{detail}</p>
                   </div>
                 ))}
@@ -183,20 +193,20 @@ export default function UniversitiesPage() {
                   setRegionType('all');
                   setSearchTerm('');
                 }}
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm hover:border-violet-300 hover:text-violet-700"
+                className="inline-flex items-center justify-center border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm hover:border-cyan-300 hover:text-cyan-700"
               >
-                Reset filters
+                ↺ Reset filters
               </button>
             </div>
 
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
+            <div className="mt-6 border border-slate-200 bg-slate-50 p-4 shadow-sm">
               <div className="grid gap-3 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
                 <label className="block">
                   <span className="text-xs font-bold uppercase tracking-wide text-slate-500">State / UT</span>
                   <select
                     value={selectedRegion}
                     onChange={(event) => setSelectedRegion(event.target.value)}
-                    className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
+                    className="mt-2 w-full border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
                   >
                     <option value="All">All states and UTs</option>
                     {allRegions.map((region) => (
@@ -212,12 +222,12 @@ export default function UniversitiesPage() {
                     value={searchTerm}
                     onChange={(event) => setSearchTerm(event.target.value)}
                     placeholder="Search university, state, field, CUET..."
-                    className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
+                    className="mt-2 w-full border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
                   />
                 </label>
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Showing</span>
-                  <div className="mt-2 rounded-xl bg-slate-950 px-4 py-3 text-center text-sm font-bold text-white">
+                  <div className="mt-2 bg-slate-950 px-4 py-3 text-center text-sm font-bold text-white">
                     {filteredRegions.length} results
                   </div>
                 </div>
@@ -236,8 +246,8 @@ export default function UniversitiesPage() {
                     onClick={() => setRegionType(value)}
                     className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
                       regionType === value
-                        ? 'border-violet-600 bg-violet-600 text-white'
-                        : 'border-slate-200 bg-white text-slate-600 hover:border-violet-300 hover:text-violet-700'
+                        ? 'border-cyan-700 bg-cyan-700 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:border-cyan-300 hover:text-cyan-700'
                     }`}
                   >
                     {label}
@@ -247,18 +257,18 @@ export default function UniversitiesPage() {
             </div>
 
             {selectedRegionData && (
-              <div className="mt-5 grid gap-4 rounded-2xl border border-violet-100 bg-violet-50 p-5 lg:grid-cols-[0.8fr_1.2fr]">
+              <div className="mt-5 grid gap-4 border border-cyan-100 bg-cyan-50 p-5 lg:grid-cols-[0.8fr_1.2fr]">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wide text-violet-600">Selected region</p>
-                  <h3 className="mt-1 text-xl font-bold text-violet-950">{selectedRegionData.state}</h3>
-                  <p className="mt-2 text-sm leading-6 text-violet-900">{selectedRegionData.bestFor}</p>
+                  <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Selected region</p>
+                  <h3 className="mt-1 text-xl font-bold text-cyan-950">{selectedRegionData.state}</h3>
+                  <p className="mt-2 text-sm leading-6 text-cyan-950">{selectedRegionData.bestFor}</p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-xl bg-white p-4">
+                  <div className="bg-white p-4">
                     <p className="text-xs font-bold uppercase tracking-wide text-slate-400">Top options</p>
                     <p className="mt-1 text-sm font-semibold text-slate-800">{selectedRegionData.topUniversities.join(', ')}</p>
                   </div>
-                  <div className="rounded-xl bg-white p-4">
+                  <div className="bg-white p-4">
                     <p className="text-xs font-bold uppercase tracking-wide text-slate-400">Admission note</p>
                     <p className="mt-1 text-sm leading-6 text-slate-700">{selectedRegionData.admissionNote}</p>
                   </div>
@@ -269,11 +279,13 @@ export default function UniversitiesPage() {
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {filteredRegions.map((region) => (
-              <article key={region.state} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl">
+              <article key={region.state} className="group overflow-hidden border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-cyan-200 hover:shadow-xl">
+                <div className="h-1.5 bg-gradient-to-r from-cyan-500 via-indigo-500 to-amber-400" />
+                <div className="p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-                      {unionTerritoryUniversityGuide.some((item) => item.state === region.state) ? 'Union Territory' : 'State'}
+                      {isUnionTerritoryRegion(region.state) ? 'Union Territory' : 'State'}
                     </p>
                     <h3 className="mt-1 text-card-title text-slate-900">{region.state}</h3>
                   </div>
@@ -296,24 +308,27 @@ export default function UniversitiesPage() {
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-400">Central university option</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {region.centralUniversities.map((university) => (
-                      <span key={university} className="rounded-full bg-violet-50 px-2.5 py-1 text-xs font-semibold text-violet-700">
+                      <span key={university} className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                        university.startsWith('No dedicated') ? 'bg-slate-100 text-slate-500' : 'bg-indigo-50 text-indigo-700'
+                      }`}>
                         {university}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="mt-4 rounded-xl bg-slate-50 p-4">
+                <div className="mt-4 bg-slate-50 p-4">
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-400">Best for</p>
                   <p className="mt-1 text-sm leading-6 text-slate-700">{region.bestFor}</p>
                   <p className="mt-3 text-xs font-bold uppercase tracking-wide text-slate-400">Admission note</p>
                   <p className="mt-1 text-sm leading-6 text-slate-600">{region.admissionNote}</p>
+                </div>
                 </div>
               </article>
             ))}
           </div>
 
           {filteredRegions.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+            <div className="border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
               <h3 className="text-card-title text-slate-900">No universities found</h3>
               <p className="mt-2 text-sm text-slate-500">Try another state, field, or reset the filters.</p>
             </div>
@@ -322,7 +337,7 @@ export default function UniversitiesPage() {
       </section>
 
       <section className="section-container py-12">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="text-section-title text-slate-900">Central universities quick list</h2>
@@ -331,7 +346,7 @@ export default function UniversitiesPage() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {featuredCentralUniversities.map((university) => (
-              <div key={`${university.name}-${university.state}`} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+              <div key={`${university.name}-${university.state}`} className="border border-slate-100 bg-slate-50 p-4 transition-colors hover:border-cyan-200 hover:bg-cyan-50">
                 <p className="font-bold text-slate-900">{university.name}</p>
                 <p className="mt-1 text-sm text-slate-500">{university.state}</p>
               </div>
