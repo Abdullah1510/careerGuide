@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -11,7 +11,6 @@ export default function Navbar() {
   const pathname = location.pathname;
 
   const navLinks = [
-    { to: '/', label: t('nav.home'), end: true },
     { to: '/streams', label: t('nav.careerStreams') },
     { to: '/after-10th', label: t('nav.after10th') },
     { to: '/after-12th', label: t('nav.after12th') },
@@ -105,12 +104,13 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <button
-            onClick={() => navigate('/')}
+          <Link
+            to="/"
             className="flex items-center gap-3 group"
+            aria-label="CareerGuide Roadmap Hub — Home"
           >
             <Logo tone="light" />
-          </button>
+          </Link>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (

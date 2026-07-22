@@ -14,7 +14,6 @@ export default function Footer() {
     exams: false,
   });
   const quickLinks = [
-    { to: '/', label: t('nav.home') },
     { to: '/streams', label: t('nav.careerStreams') },
     { to: '/after-10th', label: t('nav.after10th') },
     { to: '/after-12th', label: t('nav.after12th') },
@@ -62,7 +61,13 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Logo tone="light" />
+            <Link
+              to="/"
+              className="inline-flex rounded-2xl focus:outline-none focus:ring-2 focus:ring-violet-400"
+              aria-label="CareerGuide Roadmap Hub — Home"
+            >
+              <Logo tone="light" />
+            </Link>
             <p className="mt-4 text-sm leading-relaxed">{t('footer.description')}</p>
             <p className="mt-5 text-xs text-slate-500">🇮🇳 {t('footer.madeFor')}</p>
           </div>

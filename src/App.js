@@ -23,6 +23,7 @@ import StreamGuidePage from './pages/StreamGuidePage';
 import AboutPage from './pages/AboutPage';
 import ExamDetailPage from './pages/ExamDetailPage';
 import UniversitiesPage from './pages/UniversitiesPage';
+import Seo from './components/Seo';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -93,6 +94,7 @@ function CounselingPage() {
 export default function App() {
   return (
     <>
+      <Seo />
       <ScrollToTop />
       <Routes>
         <Route element={<Shell />}>
