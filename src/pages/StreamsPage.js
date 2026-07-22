@@ -21,6 +21,16 @@ export default function StreamsPage() {
       </div>
 
       <div className="section-container py-12">
+        <section className="max-w-4xl mb-10" aria-labelledby="streams-overview">
+          <h2 id="streams-overview" className="text-2xl sm:text-3xl font-bold text-slate-900">
+            Choose the right career stream after Class 10
+          </h2>
+          <p className="mt-3 text-slate-600 leading-relaxed">
+            Your Class 11 stream shapes the subjects you study, but it does not lock you into one career forever.
+            Start with the subjects you enjoy, then compare the courses, entrance exams and work you may want to pursue.
+            Use these guides to explore Science, Commerce, Arts, Pharmacy and Design in one place.
+          </p>
+        </section>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {careerStreamGuides.map((guide, index) => (
             <Link
@@ -60,6 +70,26 @@ export default function StreamsPage() {
             </Link>
           ))}
         </div>
+
+        <section className="mt-14 grid gap-6 lg:grid-cols-2" aria-label="How to choose a career stream">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-slate-900">How to choose your stream</h2>
+            <ol className="mt-4 space-y-3 text-slate-600 leading-relaxed list-decimal list-inside">
+              <li>List the subjects you genuinely enjoy and can study consistently.</li>
+              <li>Explore at least three careers linked to each option.</li>
+              <li>Check course eligibility and entrance exams before deciding.</li>
+              <li>Discuss your shortlist with parents, teachers or a counsellor.</li>
+            </ol>
+          </div>
+          <div className="bg-indigo-50 rounded-2xl border border-indigo-100 p-6">
+            <h2 className="text-2xl font-bold text-slate-900">Career stream FAQs</h2>
+            <div className="mt-4 space-y-4 text-slate-600 leading-relaxed">
+              <div><h3 className="font-semibold text-slate-900">Which stream is best after 10th?</h3><p>There is no single best stream. The right choice matches your interests, strengths and the career paths you want to keep open.</p></div>
+              <div><h3 className="font-semibold text-slate-900">Can Arts or Commerce students build strong careers?</h3><p>Yes. Both streams lead to diverse options such as law, design, finance, management, economics, civil services and entrepreneurship.</p></div>
+              <div><h3 className="font-semibold text-slate-900">Can I change my career after choosing a stream?</h3><p>Often, yes. Many degree programmes welcome students from more than one stream; always verify the eligibility rules for your chosen course.</p></div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

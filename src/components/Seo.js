@@ -18,8 +18,8 @@ const pageMetadata = {
     description: 'Find step-by-step career roadmaps, courses, entrance exams, and salary guidance after Class 12.',
   },
   '/streams': {
-    title: 'Career Streams and Guides | CareerGuide India',
-    description: 'Compare career streams in India and find the right study path for your interests and goals.',
+    title: 'Career Streams After 10th in India: Science, Commerce, Arts & More',
+    description: 'Compare Science, Commerce, Arts, Pharmacy and Design career streams after Class 10. Explore subjects, entrance exams and career paths in India.',
   },
   '/exams': {
     title: 'Entrance Exam Calendar 2026 | CareerGuide India',
@@ -72,6 +72,7 @@ export default function Seo() {
     setMeta('meta[property="og:url"]', 'content', canonicalUrl);
     setMeta('meta[name="twitter:title"]', 'content', title);
     setMeta('meta[name="twitter:description"]', 'content', description);
+    setMeta('meta[name="robots"]', 'content', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
 
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
@@ -80,6 +81,34 @@ export default function Seo() {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', canonicalUrl);
+
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': pathname === '/streams' ? 'CollectionPage' : 'WebPage',
+      name: title,
+      description,
+      url: canonicalUrl,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'CareerGuide India',
+        url: siteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'CareerGuide India',
+        url: siteUrl,
+        logo: `${siteUrl}/career-advice-logo.png`,
+      },
+    };
+
+    let schema = document.querySelector('script[data-page-schema="true"]');
+    if (!schema) {
+      schema = document.createElement('script');
+      schema.type = 'application/ld+json';
+      schema.dataset.pageSchema = 'true';
+      document.head.appendChild(schema);
+    }
+    schema.textContent = JSON.stringify(structuredData);
   }, [pathname]);
 
   return null;
